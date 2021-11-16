@@ -16,14 +16,12 @@ public class Main {
         int x = 2;
         System.out.println("x = " + x);
         try {
-            new Main().doSerializeUncheck();
             new Main().doSerialazeChek();
-        } catch (MyDomainExeption myDomainExeption) {
-
-            myDomainExeption.printStackTrace();
-        } catch (NullPointerException n) {
+        } catch (MyDomainExeption e) {
             x = 3;
             System.out.println("x = " + x);
+            e.printStackTrace();
+        } catch (NullPointerException n) {
             n.fillInStackTrace();
         } catch (Exception t) {
             t.getStackTrace();
@@ -32,6 +30,16 @@ public class Main {
             System.out.println("x = " + x);
         }
 
+        Student student = new Student();
+        try {
+            student.setName("Vasyliy");
+            student.setAge(61);
+        }catch (IllegalArgumentException a){
+            System.out.println(a.getLocalizedMessage());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        new Main().doSerializeUncheck();
 
         System.out.println("end of app");
     }
@@ -40,7 +48,8 @@ public class Main {
         try {
             deserialize("Inside");
         } catch (MyDomainExeption e) {
-            System.out.println(e.fillInStackTrace());
+            System.out.println("In method checkable");
+            System.out.println(e.getCause());
             throw e;
         }
     }

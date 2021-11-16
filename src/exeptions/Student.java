@@ -5,7 +5,7 @@ public class Student {
     int age;
 
     public void setName(String name) {
-        if (name == null || name.length() == 0) {
+        if (name == null || name.length() <= 1) {
             throw new IllegalArgumentException("Input correct name");
         }
         this.name = name;
